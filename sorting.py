@@ -9,8 +9,8 @@ def analyze():
 
     writing = open(outfile,'w',encoding="UTF-8")    # "output.txt"が無ければ新規作成=>主力、あれば上書き保存
 
-    out = ''
-    keep = '　'
+    out = ''                                        # 1文章のデータを補完
+    keep = '　'                                     # 調べている文字の1文字前がなにか補完
     for line in data:                               # 入力ファイルを1行ずつ読む
         for c in list(line):                        # 1文字ずつ読む
             if c == '」':
