@@ -3,8 +3,6 @@
 
 # Overview
 input.txtに記述している文章をsorting.pyで整理して1行に1文章されたデータがoutput.txtに出力されます。
-今回、input.txtには青空文庫の銀河鉄道の夜を記載しています。
-あまり大きなデータでなければinput.txtに好きな文書を使用してみて下さい。
 
 ## 実行環境
 - Python 3.5.2
