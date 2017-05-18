@@ -6,7 +6,7 @@ def analyze():
     data = read.readlines()                         # ファイル終端まで全て読んだデータを返す
     read.close()                                    # 入力ファイルを閉じる
 
-    writing = open(outfile,'w',encoding="UTF-8")    # "output.txt"が無ければ新規作成=>主力、あれば上書き保存
+    writing = open(outfile,'w',encoding="Shift-JIS")    # Shift-JISで出力
 
     id = ''                                         # 1文章に最大7桁のidを付けるための初期値
     count = 0                                       # idの管理
