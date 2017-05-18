@@ -9,6 +9,10 @@ def analyze():
 
     writing = open(outfile,'w',encoding="UTF-8")    # "output.txt"が無ければ新規作成=>主力、あれば上書き保存
 
+    id = ''                                         # 1文章に最大7桁のidを付けるための初期値
+    count = 0                                       # idの管理
+    digit = 7                                       # idの桁数
+
     out = ''                                        # 1文章のデータを補完
     keep = '　'                                     # 調べている文字の1文字前がなにか補完
     for line in data:                               # 入力ファイルを1行ずつ読む
@@ -16,31 +20,34 @@ def analyze():
             if c == '」':
                 out += "」\n"
                 writing.write(out)
+                id = str(count)
+                out = id.zfill(digit)+'\t'
+                count += 1
                 keep = '　'
-                out = ''
             elif c == '。':
                 out += '。'
                 keep = c
             elif keep == '。':
                 out += '\n'
                 writing.write(out)
+                id = str(count)
+                out = id.zfill(digit)+'\t'+c
+                count += 1
                 keep = c
-                out = c
             elif c == '「':
                 if keep == '」':
                     keep = c
                     out += c
                 else:
-                    out += '\n「'
+                    out += '\n'
                     writing.write(out)
-                    out = ''
+                    id = str(count)
+                    out = id.zfill(digit)+'\t「'
+                    count += 1
                     keep = c
             else:
                 keep = c
                 out += c
-    # 出力ファイ+;ルを閉じる
+    # 出力ファイルを閉じる
     writing.close()
 analyze()
-
-# memo
-# ファイル全てから1行ずつ読み込んでいるため、その1行の中に"。"が入っていなくても改行されてしまう
