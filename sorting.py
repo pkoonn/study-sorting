@@ -1,5 +1,5 @@
 # coding: UTF-8
-
+# import string                                       # 特定のグループの文字列をまとめて取得
 def analyze():
     readfile = "input.txt"                          # 銀河鉄道の夜が記載
     outfile = "output.txt"                          # 出力結果
@@ -18,12 +18,22 @@ def analyze():
     for line in data:                               # 入力ファイルを1行ずつ読む
         for c in list(line):                        # 1文字ずつ読む
             if c == '」':
-                out += "」\n"
-                writing.write(out)
-                id = str(count)
-                out = id.zfill(digit)+'\t'
-                count += 1
-                keep = '　'
+                if keep == '。':
+                    id = str(count)
+                    out += "」"
+                    # out += '」\n'+id.zfill(digit)
+                elif '、' and '…':
+                    id = str(count)
+                    out += '」\n'+id.zfill(digit)
+                    count += 1
+                else:
+                    if out[-1].isdigit() == True:
+                        id = str(count)
+                        out += keep+'」'
+                    else:
+                        out += id.zfill(digit)+keep+'」\n'
+                        count += 1
+                    keep = c
             elif c == '。':
                 out += '。'
                 keep = c
@@ -36,15 +46,19 @@ def analyze():
                 keep = c
             elif c == '「':
                 if keep == '」':
-                    keep = c
-                    out += c
+                    id = str(count)
+                    # if out[-1].isalnum() == True:
+                    out += '\n'+id.zfill(digit)+'\t「'
+                    writing.write(out)
+                    out = ''
+                    count += 1
                 else:
                     out += '\n'
                     writing.write(out)
                     id = str(count)
                     out = id.zfill(digit)+'\t「'
                     count += 1
-                    keep = c
+                keep = '「'
             else:
                 keep = c
                 out += c
